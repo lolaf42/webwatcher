@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WebWatcher</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <h1>WebWatcher</h1>
+    <a href="#" id="open-options" title="Settings">⚙</a>
+  </header>
+
+  <p class="hint">Monitoring only runs while Firefox is open.</p>
+
+  <div id="entry-list"></div>
+
+  <div id="empty-hint" class="empty-hint hidden">
+    No monitored URLs yet. <a href="#" id="go-options">Open settings</a> to add one.
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

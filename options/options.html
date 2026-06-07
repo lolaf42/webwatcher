@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WebWatcher – Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <main>
+    <h1>WebWatcher Settings</h1>
+
+    <section class="card">
+      <h2>Global</h2>
+
+      <label for="webhook-url">n8n Webhook URL</label>
+      <input type="url" id="webhook-url" placeholder="https://your-n8n.example.com/webhook/..." />
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="notifications-enabled" />
+        Show browser notifications on change
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>Monitored URLs</h2>
+      <p class="hint">Monitoring only runs while Firefox is open.</p>
+
+      <div id="entries-container"></div>
+
+      <button id="btn-add" class="btn-primary">+ Add URL</button>
+    </section>
+
+    <div class="action-row">
+      <button id="btn-save" class="btn-primary">Save</button>
+      <span id="save-status" class="save-status"></span>
+    </div>
+  </main>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>

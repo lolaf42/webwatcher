@@ -1,0 +1,131 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #1e1e2e;
+  --surface: #2a2a3d;
+  --border: #3a3a55;
+  --accent: #7c9ef8;
+  --text: #e0e0f0;
+  --muted: #8888aa;
+  --ok: #4caf88;
+  --warn: #e8a030;
+  --err: #e05555;
+  --radius: 8px;
+  font-size: 14px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+  min-width: 300px;
+  max-width: 480px;
+  padding: 12px;
+  width: 100%;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: .03em; }
+
+#open-options {
+  color: var(--muted);
+  font-size: 1.2rem;
+  text-decoration: none;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+#open-options:hover { color: var(--accent); }
+
+.hint {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+/* Entry cards */
+.entry-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+
+.entry-label {
+  font-weight: 600;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.entry-url {
+  font-size: 0.72rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 6px;
+}
+
+.entry-meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 8px;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.entry-meta .key { color: var(--muted); }
+.entry-meta .val { color: var(--text); }
+
+.badge {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.badge-ok  { background: #1a4a33; color: var(--ok); }
+.badge-err { background: #4a1a1a; color: var(--err); }
+.badge-unk { background: #333355; color: var(--muted); }
+
+.btn-check {
+  width: 100%;
+  padding: 6px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #111;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.btn-check:hover { opacity: .85; }
+.btn-check:disabled { opacity: .45; cursor: default; }
+
+.checking-msg {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.empty-hint {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding: 20px 0;
+}
+.empty-hint a { color: var(--accent); }
+.hidden { display: none; }

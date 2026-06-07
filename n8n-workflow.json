@@ -1,0 +1,87 @@
+{
+  "name": "WebWatcher – Page Change Alert",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "webwatcher",
+        "responseMode": "onReceived",
+        "responseData": "firstEntryJson"
+      },
+      "id": "webhook-node",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "webwatcher-incoming"
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "subject",
+              "value": "=Page changed: {{ $json.label || $json.url }}"
+            },
+            {
+              "name": "bodyText",
+              "value": "=Page change detected!\n\nLabel : {{ $json.label }}\nURL   : {{ $json.url }}\nTitle : {{ $json.pageTitle }}\nAt    : {{ $json.timestamp }}\n\n── Current text ─────────────────────────────\n{{ $json.changedText }}\n\n── Diff ─────────────────────────────────────\n{{ $json.diff }}"
+            },
+            { "name": "label",    "value": "={{ $json.label }}" },
+            { "name": "url",      "value": "={{ $json.url }}" },
+            { "name": "timestamp","value": "={{ $json.timestamp }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-node",
+      "name": "Format",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "webwatcher@example.com",
+        "toEmail": "you@example.com",
+        "subject": "={{ $json.subject }}",
+        "text": "={{ $json.bodyText }}",
+        "options": {}
+      },
+      "id": "email-node",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[ { "node": "Format", "type": "main", "index": 0 } ]]
+    },
+    "Format": {
+      "main": [[ { "node": "Send Email", "type": "main", "index": 0 } ]]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "tags": ["webwatcher"],
+  "_readme": {
+    "webhookPath": "/webhook/webwatcher",
+    "notes": [
+      "1. Import this file into n8n via Workflows → Import.",
+      "2. Create an SMTP credential under Credentials and update the 'Send Email' node.",
+      "3. Set fromEmail / toEmail in the Send Email node.",
+      "4. Activate the workflow, copy the production Webhook URL, and paste it into the WebWatcher options page.",
+      "5. The email subject uses {{ $json.label }} so each monitored page is clearly identified.",
+      "6. No hardcoded URLs – label/url come from the extension payload."
+    ]
+  }
+}
