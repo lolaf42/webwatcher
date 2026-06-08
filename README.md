@@ -2,7 +2,7 @@
 
 Ein Firefox-Add-on, das beliebige Webseiten auf Änderungen überwacht und dich
 per E-Mail (über n8n) und Browser-Benachrichtigung informiert. Vorkonfiguriert
-für die Dresden-Informationstage-Seite, aber für beliebige Seiten erweiterbar.
+für [hier webseite eintragen], aber für beliebige Seiten erweiterbar.
 
 **Wichtig:** Das Add-on prüft nur, solange Firefox geöffnet ist. Die E-Mail
 selbst verschickt dein n8n-Server.
@@ -50,7 +50,7 @@ In den Einstellungen (⚙) → **+ Seite hinzufügen**:
   Wenn leer oder nicht gefunden, wird der gesamte Seitentext überwacht.
 - **Intervall:** Prüfabstand in Minuten.
 
-Für andere Domains als dresden.de muss in `manifest.json` unter
+Für andere Domains als [hier webseite eintragen] muss in `manifest.json` unter
 `host_permissions` der entsprechende Eintrag ergänzt und das Add-on neu geladen
 werden, z. B. `"https://www.example.com/*"`. Alternativ `"<all_urls>"` setzen
 (prüft dann alle Seiten, weitreichendere Berechtigung).
