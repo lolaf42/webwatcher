@@ -5,7 +5,7 @@
   "description": "Überwacht Webseiten auf Änderungen und meldet sie per Webhook (n8n) und Browser-Benachrichtigung.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "webwatcher@paul.local",
+      "id": "[hier email eintragen@testperson.local]",
       "strict_min_version": "115.0"
     },
     "gecko_android": {
@@ -18,7 +18,7 @@
     "notifications"
   ],
   "host_permissions": [
-    "https://www.dresden.de/*"
+    "[hier webseite eintragen]*"
   ],
   "background": {
     "scripts": ["background.js"],
