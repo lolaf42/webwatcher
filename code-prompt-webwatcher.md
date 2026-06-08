@@ -3,7 +3,7 @@ user-defined list of web pages for changes and reports detected changes by
 e-mail via an n8n webhook. Target: Firefox Desktop AND Firefox for Android.
 
 PRIMARY USE CASE (default seeded entry)
-- URL: https://www.dresden.de/de/wirtschaft/wirtschaftsservice/informationstage.php
+- URL: [hier webseite eintragen]
 - CSS selector to monitor: #content
 - This page currently shows a placeholder: "An dieser Stelle finden Sie zu
   gegebener Zeit die Ankündigung des nächsten Informationstages." When an
@@ -33,8 +33,8 @@ CHANGE DETECTION
 MULTIPLE PAGES / LABELS
 - The list supports an arbitrary number of monitored URLs (different events
   / different sites), each with its own selector, interval and an optional
-  user-defined "label" field (e.g. "Dresden Infotage", "Messe XY").
-- dresden.de is only the pre-seeded default entry, never hardcoded elsewhere.
+  user-defined "label" field (e.g. "Messe XY").
+- [hier webseite eintragen] is only the pre-seeded default entry, never hardcoded elsewhere.
 
 NOTIFICATION VIA n8n
 - WebExtensions cannot send SMTP. On change, POST JSON to a user-configured
@@ -45,7 +45,7 @@ NOTIFICATION VIA n8n
 - A single n8n webhook receives changes from ALL monitored URLs mixed
   together. The sample n8n workflow must use {{ $json.label }} (or url as
   fallback) in the e-mail subject and body so each notification clearly
-  identifies which page changed. Do not hardcode dresden.de in the workflow.
+  identifies which page changed. Do not hardcode [hier webseite eintragen] in the workflow.
 - Also fire a browser.notifications notification as immediate local feedback.
 
 REACHABILITY FEEDBACK
@@ -63,7 +63,7 @@ UI
 CONSTRAINTS
 - Manifest V3, plain ES modules, loadable as a temporary add-on with no
   build step. Permissions: alarms, storage, notifications, host_permissions
-  (let user grant per-domain; request dresden.de by default).
+  (let user grant per-domain; request [hier webseite eintragen] by default).
 - All data local; the only external call is to the user's own n8n webhook.
 
 DELIVERABLES
