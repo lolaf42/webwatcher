@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="options.css">
+  <title>WebWatcher Einstellungen</title>
+</head>
+<body>
+  <div class="wrap">
+    <h1>WebWatcher Einstellungen</h1>
+
+    <section>
+      <h2>Allgemein</h2>
+      <label>n8n Webhook-URL
+        <input type="url" id="webhook" placeholder="https://n8n.example.com/webhook/...">
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" id="notifications">
+        Browser-Benachrichtigungen anzeigen
+      </label>
+    </section>
+
+    <section>
+      <h2>Überwachte Seiten</h2>
+      <div id="entries"></div>
+      <button id="add" class="secondary">+ Seite hinzufügen</button>
+    </section>
+
+    <div class="actions">
+      <button id="save">Speichern</button>
+      <span id="status"></span>
+    </div>
+  </div>
+
+  <script src="options.js" type="module"></script>
+</body>
+</html>

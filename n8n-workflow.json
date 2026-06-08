@@ -1,0 +1,60 @@
+{
+  "name": "WebWatcher Mail",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "webwatcher",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-node",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "webwatcher"
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.first().json;\nconst body = raw.body || raw;\nconst label = body.label || body.url || 'Überwachte Seite';\nconst url = body.url || '';\nconst timestamp = body.timestamp || '';\nconst text = body.changedText || '';\n\n// Platzhaltersatz der Dresden-Seite: solange er vorkommt, gibt es KEINE neue Veranstaltung\nconst placeholder = 'An dieser Stelle finden Sie zu gegebener Zeit die Ankündigung';\nconst hasPlaceholder = text.includes(placeholder);\n\nlet subject, mailText;\nif (hasPlaceholder) {\n  subject = 'Keine neuen Veranstaltungen: ' + label;\n  mailText = 'Die Seite \"' + label + '\" wurde geändert, aber es ist weiterhin KEINE neue Veranstaltung angekündigt (Platzhaltertext vorhanden).\\n\\nURL: ' + url + '\\nStand: ' + timestamp;\n} else {\n  subject = 'MÖGLICHE NEUE VERANSTALTUNG: ' + label;\n  mailText = 'Auf der Seite \"' + label + '\" ist der Platzhaltertext verschwunden – möglicherweise wurde eine neue Veranstaltung angekündigt!\\n\\nBitte hier prüfen:\\n' + url + '\\n\\nStand: ' + timestamp + '\\n\\n--- Überwachter Inhalt ---\\n' + text.slice(0, 3000);\n}\n\nreturn [{ json: { subject, text: mailText } }];"
+      },
+      "id": "format-node",
+      "name": "Format",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "webwatcher@example.com",
+        "toEmail": "DEINE-ADRESSE@example.com",
+        "subject": "={{ $json.subject }}",
+        "text": "={{ $json.text }}",
+        "options": {}
+      },
+      "id": "email-node",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "credentials": {
+        "smtp": {
+          "id": "REPLACE_WITH_YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Format", "type": "main", "index": 0 }]]
+    },
+    "Format": {
+      "main": [[{ "node": "Send Email", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "tags": []
+}

@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "WebWatcher",
+  "version": "1.0.0",
+  "description": "Überwacht Webseiten auf Änderungen und meldet sie per Webhook (n8n) und Browser-Benachrichtigung.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "webwatcher@paul.local",
+      "strict_min_version": "115.0"
+    },
+    "gecko_android": {
+      "strict_min_version": "115.0"
+    }
+  },
+  "permissions": [
+    "alarms",
+    "storage",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://www.dresden.de/*"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "type": "module"
+  },
+  "action": {
+    "default_title": "WebWatcher",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png"
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  }
+}
